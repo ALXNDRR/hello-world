@@ -1,0 +1,563 @@
+#N canvas 0 22 1280 733 10;
+#X obj 390 187 osc~ 440;
+#X obj 391 260 dac~;
+#X floatatom 390 155 5 0 0 0 - - -, f 5;
+#X msg 449 187 0;
+#X msg 482 187 1;
+#X text 487 171 on;
+#X text 449 171 off;
+#X text 16 133 Surface Elements in PD;
+#X obj 67 160 osc~;
+#X obj 138 160 dac~;
+#X obj 103 160 *~ 0;
+#X text 16 160 Objects;
+#X msg 74 186 0;
+#X msg 108 186 1;
+#X text 16 187 Messages;
+#X floatatom 62 214 5 0 0 0 - - -, f 5;
+#X text 16 214 Number;
+#X obj 212 213 osc~ 440;
+#X floatatom 212 187 5 0 0 0 - - -, f 5;
+#X obj 212 297 dac~;
+#X obj 212 267 *~ 0;
+#X text 212 133 Cables;
+#X text 212 160 Thin lines carry data;
+#X text 212 240 Thick lines carry signal;
+#X obj 16 459 +;
+#X floatatom 16 436 5 0 0 0 - - -, f 5;
+#X floatatom 51 436 5 0 0 0 - - -, f 5;
+#X floatatom 16 486 5 0 0 0 - - -, f 5;
+#X floatatom 93 435 5 0 0 0 - - -, f 5;
+#X floatatom 129 435 5 0 0 0 - - -, f 5;
+#X obj 93 457 -;
+#X floatatom 93 485 5 0 0 0 - - -, f 5;
+#X floatatom 176 435 5 0 0 0 - - -, f 5;
+#X floatatom 212 435 5 0 0 0 - - -, f 5;
+#X floatatom 176 486 5 0 0 0 - - -, f 5;
+#X floatatom 259 435 5 0 0 0 - - -, f 5;
+#X floatatom 294 435 5 0 0 0 - - -, f 5;
+#X floatatom 259 486 5 0 0 0 - - -, f 5;
+#X obj 176 460 *;
+#X obj 259 462 /;
+#X floatatom 346 434 5 0 0 0 - - -, f 5;
+#X floatatom 381 434 5 0 0 0 - - -, f 5;
+#X floatatom 346 484 5 0 0 0 - - -, f 5;
+#X obj 346 461 pow;
+#X text 16 408 Enter data into the inlets from RIGHT to LEFT;
+#X msg 438 465 3;
+#X obj 438 491 * 3;
+#X obj 486 491 * 4;
+#X floatatom 486 518 5 0 0 0 - - -, f 5;
+#X floatatom 438 519 5 0 0 0 - - -, f 5;
+#X msg 486 464 45;
+#X obj 438 434 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 816 434 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 816 461 trigger bang bang;
+#X msg 816 488 3;
+#X msg 851 488 5;
+#X obj 816 515 * 3;
+#X obj 851 515 * 4;
+#X floatatom 816 542 5 0 0 0 - - -, f 5;
+#X floatatom 851 543 5 0 0 0 - - -, f 5;
+#X obj 816 568 +;
+#X floatatom 816 595 5 0 0 0 - - -, f 5;
+#X text 929 461 An outlet is created with every argument you enter
+;
+#X obj 524 434 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 524 466 trigger bang bang;
+#X msg 524 488 3;
+#X msg 559 488 5;
+#X obj 524 515 * 3;
+#X obj 559 514 * 4;
+#X obj 524 568 +;
+#X floatatom 524 595 5 0 0 0 - - -, f 5;
+#X obj 576 568 print;
+#X obj 640 463 trigger bang bang;
+#X msg 640 504 3;
+#X msg 731 501 5;
+#X obj 640 537 * 3;
+#X obj 731 532 * 4;
+#X obj 640 566 print right;
+#X obj 731 564 print left;
+#X obj 640 434 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 905 695 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 905 722 expr (4*(5-2))/4;
+#X floatatom 905 751 5 0 0 0 - - -, f 5;
+#X text 905 676 Larger mathmatical expressions;
+#X obj 906 822 expr ($f1*(5-2))/$f2;
+#X floatatom 906 796 5 0 0 0 - - -, f 5;
+#X floatatom 1023 797 5 0 0 0 - - -, f 5;
+#X floatatom 906 850 5 0 0 0 - - -, f 5;
+#X text 901 772 Variables: $f1 \, $f2 \, $f3 \, etc.;
+#X text 816 408 Triggers shoot data in the correct order RIGHT to LEFT
+;
+#X text 17 978 If you give "moses" an argument of 10 and give it an
+input that is smaller than 10 \, this input comes out of the left outlet.
+If the input is 10 or greater \, it is sent to the right outlet.;
+#X obj 18 1073 moses 10;
+#X floatatom 18 1044 5 0 0 0 - - -, f 5;
+#X floatatom 63 1110 5 0 0 0 - - -, f 5;
+#X floatatom 18 1111 5 0 0 0 - - -, f 5;
+#X obj 110 1071 moses 10;
+#X floatatom 110 1042 5 0 0 0 - - -, f 5;
+#X floatatom 155 1108 5 0 0 0 - - -, f 5;
+#X floatatom 110 1109 5 0 0 0 - - -, f 5;
+#X text 397 978 "select" (usually abbreviated to "sel"): Input is a
+number \, output is a bang only when the input is the same as the argument.
+Any other numbers received as input come out the bottom right outlet.
+;
+#X obj 397 1074 sel 5;
+#X obj 397 1106 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X floatatom 424 1104 5 0 0 0 - - -, f 5;
+#X floatatom 397 1045 5 0 0 0 - - -, f 5;
+#X text 16 15 Alexander Pareja 3/25/18;
+#X text 501 676 Relational Tests;
+#X text 500 700 "==": If the left input is the same as the argument
+or the right input \, the output is 1 \, otherwise 0:;
+#X obj 501 762 == 3;
+#X floatatom 501 786 5 0 0 0 - - -, f 5;
+#X floatatom 501 739 5 0 0 0 - - -, f 5;
+#X obj 539 760 == 3;
+#X floatatom 539 786 5 0 0 0 - - -, f 5;
+#X floatatom 539 738 5 0 0 0 - - -, f 5;
+#X floatatom 939 491 5 0 0 0 - - -, f 5;
+#X floatatom 902 491 5 0 0 0 - - -, f 5;
+#X text 502 809 ">=": If the left input is larger than or equal to
+the argument or the right input \, the output is 1 \, otherwise 0 ">":
+If the left input is larger than the argument or the right input \,
+the output is 1 \, otherwise 0 "!=": If the left input is not equal
+to the argument or the right input \, the output is 1 \, otherwise
+0 "<": If the left input is smaller than the argument or the right
+input \, the output is 1 \, otherwise 0 "<=": If the left input is
+smaller than or equal to the argument or the right input \, the output
+is 1 \, otherwise 0;
+#X text 16 676 A quotient with a "remainder" can be achieved in Pd
+with "div" and "mod":;
+#X floatatom 19 763 5 0 0 0 - - -, f 5;
+#X floatatom 63 763 5 0 0 0 - - -, f 5;
+#X obj 63 735 mod 7;
+#X obj 19 735 div 7;
+#X floatatom 19 712 5 0 0 0 - - -, f 5;
+#X text 1637 67 .;
+#X text 795 978 "Random" creates a random number within a given range.
+The lower limit has a default value of 0 \, the upper limit is entered
+as an argument (whole numbers only). The upper limit is exclusive \;
+i.e. \, if you enter "random 4" \, every time the object receives a
+bang as input it will randomly select an output of 0 \, 1 \, 2 \, or
+3;
+#X obj 817 1084 random 5;
+#X obj 796 1085 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X floatatom 817 1108 5 0 0 0 - - -, f 5;
+#X text 110 725 "sin" = Sine "cos" = Cosine "tan" = Tangent "log" =
+(natural) Logarithm "abs" = Absolute value "sqrt" = Square root;
+#X floatatom 63 713 5 0 0 0 - - -, f 5;
+#X obj 390 219 *~ 0;
+#X obj 400 1298 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X floatatom 399 1389 5 0 0 0 - - -, f 5;
+#X msg 439 1327 0;
+#X obj 399 1357 + 1;
+#X obj 400 1326 f;
+#X text 17 1245 Another important object in the context of number operations
+is the "float" object (abbreviated: "f"). This object is used to store
+numbers. When you enter a number into the right input \, it is saved
+in the object for later use. If you send a bang to the left inlet \,
+the number stored in the object is sent as output;
+#X text 388 133 A Simple Example:;
+#X text 16 92 Introduction:;
+#X text 16 361 Basic Mathematics:;
+#X text 16 1208 Float and Counter:;
+#X msg 414 3843 sup;
+#X obj 17 1338 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 17 1367 f;
+#X floatatom 17 1395 5 0 0 0 - - -, f 5;
+#X floatatom 52 1368 5 0 0 0 - - -, f 5;
+#X text 17 1421 You can also send a number directly into the left input.
+This causes it to be sent as output immediately. The number is also
+stored in the object for later use and can be resent using a bang.
+;
+#X text 400 1245 Often in Pd \, you'll want to use a "counter" that
+counts in whole numbers starting from a given input value. Here's an
+example:;
+#X text 399 1421 Explanation: First you give the "f" object a starting
+value of "0". The first time you click on the bang in the upper left
+\, the "f" sends a 0 to the "+ 1" object. This object then generates
+0 + 1 = 1 This 1 then goes into the right inlet of the "f" object.
+The next time you send a bang \, this 1 is sent as output to the "+
+1" object \, which in turn generates a 2;
+#X text 16 1696 Applications:;
+#X text 16 1549 Summary:;
+#X text 16 1586 The objects for mathematical operations demonstrate
+clearly an important rule in Pd: the inputs for a control object should
+always be entered from right to left. To ensure this is the case \,
+we often need to employ a "trigger" object \, which sends outputs from
+right to left one after the other.;
+#X text 394 1586 A "bang" is like a mouse click \, that can be sent
+or received.;
+#X text 724 1586 The "print" object displays in the Pd main window
+outputs generated when running your patch. Outputs sent one after another
+in time appear underneath each other in the list \; i.e. the output
+at the bottom of the list is the most recent.;
+#X text 16 1733 Two frequencies – two volume levels;
+#X obj 92 1836 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 137 1836 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X msg 60 1876 500;
+#X msg 137 1901 0.5;
+#X msg 92 1901 1;
+#X obj 15 1912 osc~;
+#X obj 15 1942 *~;
+#X obj 15 1976 dac~;
+#X msg 15 1877 440;
+#X text 16 1770 If you want to switch between two frequencies - a low
+quiet tone and a high loud one - you could use the following patch.
+Switch between tones by clicking on their respective bangs:;
+#X text 402 1733 An Interval;
+#X text 402 1770 To produce a dyad \, you'll need two "osc~" objects.
+In the following patch \, moving the values in the number box up and
+down will produce a vertical interval (here \, a perfect fifth) at
+various pitches:;
+#X floatatom 402 1836 5 0 0 0 - - -, f 5;
+#X obj 402 1862 * 400;
+#X obj 466 1862 * 600;
+#X obj 466 1909 osc~;
+#X obj 402 1909 osc~;
+#X obj 402 1941 *~ 0.5;
+#X obj 504 1908 print fourhundred;
+#X obj 504 1886 print sixhundred;
+#X obj 402 1973 dac~;
+#X text 792 1733 Random Melody;
+#X text 792 1770 Every bang you send will generate a pitch between
+200 and 1000 Hertz – a random melody. Now a few more examples of
+mathematical operations:;
+#X obj 793 1823 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 793 1850 random 800;
+#X obj 793 1878 + 200;
+#X floatatom 793 1906 5 0 0 0 - - -, f 5;
+#X obj 793 1933 osc~;
+#X obj 793 1961 *~ 0.7;
+#X obj 793 1989 dac~;
+#X text 16 2026 Rounding;
+#X floatatom 17 2051 5 0 0 0 - - -, f 5;
+#X obj 17 2077 + 0.5;
+#X obj 17 2102 div;
+#X floatatom 17 2129 5 0 0 0 - - -, f 5;
+#X text 59 2051 number to be rounded (positive values only);
+#X text 59 2128 Result;
+#X text 348 2026 How long is this score?;
+#X text 348 2063 A value that composers need to calculate again and
+again: you've written a piece with 324 quarter notes at a tempo of
+quarter = 72 How long is the piece in seconds?;
+#X floatatom 348 2116 5 0 0 0 - - -, f 5;
+#X floatatom 420 2116 5 0 0 0 - - -, f 5;
+#X obj 348 2142 expr ($f1/$f2)*60;
+#X floatatom 348 2169 5 0 0 0 - - -, f 5;
+#X text 730 2026 Counting in a series;
+#X text 730 2063 This counter counts only from 0 to 6 \; after the
+6 \, it starts again at 0;
+#X obj 736 2108 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 736 2134 f;
+#X obj 736 2190 mod 7;
+#X obj 736 2162 + 1;
+#X floatatom 736 2218 5 0 0 0 - - -, f 5;
+#X msg 776 2134 0;
+#X text 16 2293 Random without repetitions;
+#X text 16 2330 a patch that generates random numbers where the same
+number never occurs twice in a row (unlike the normal "random" object)
+;
+#X obj 17 2394 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 81 2415 random;
+#X obj 82 2447 trigger bang float bang float;
+#X floatatom 126 2385 5 0 0 0 - - -, f 5;
+#X obj 81 2518 f;
+#X obj 136 2545 sel 1;
+#X obj 81 2545 sel 0;
+#X obj 155 2483 f;
+#X obj 155 2514 ==;
+#X obj 82 2570 f;
+#X floatatom 82 2598 5 0 0 0 - - -, f 5;
+#X obj 130 2599 print;
+#X obj 541 2434 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 541 2489 + 200;
+#X floatatom 541 2517 5 0 0 0 - - -, f 5;
+#X obj 541 2544 osc~;
+#X obj 541 2572 *~ 0.7;
+#X obj 541 2600 dac~;
+#X obj 616 2489 + 200;
+#X floatatom 616 2517 5 0 0 0 - - -, f 5;
+#X obj 616 2544 osc~;
+#X obj 616 2572 *~ 0.7;
+#X obj 616 2600 dac~;
+#X obj 616 2461 random;
+#X floatatom 675 2437 5 0 0 0 - - -, f 5;
+#X obj 541 2461 random;
+#X floatatom 600 2425 5 0 0 0 - - -, f 5;
+#X obj 514 2398 metro;
+#X msg 716 2537 1;
+#X msg 737 2578 0;
+#X floatatom 571 2366 5 0 0 0 - - -, f 5;
+#X obj 514 2357 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text 514 2330 Create two random melodies that run simultaneously.
+;
+#X floatatom 414 3865 5 0 0 0 - - -, f 5;
+#X text 16 2664 More on trigger:;
+#X text 16 2701 The "trigger" object is capable of distributing not
+only bangs but also numbers (later we'll learn even more possibilities).
+It is usually abbreviated as "t" and instead of typing out the arguments
+"bang" and "float" \, you can use just "b" and "f":;
+#X floatatom 16 2780 5 0 0 0 - - -, f 5;
+#X obj 16 2812 t f f;
+#X obj 85 2869 print right;
+#X obj 16 2869 print left;
+#X floatatom 85 2840 5 0 0 0 - - -, f 5;
+#X floatatom 16 2839 5 0 0 0 - - -, f 5;
+#X floatatom 175 2781 5 0 0 0 - - -, f 5;
+#X obj 244 2870 print right;
+#X obj 175 2870 print left;
+#X floatatom 175 2840 5 0 0 0 - - -, f 5;
+#X obj 175 2813 t f b;
+#X obj 244 2847 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text 217 2814 The number input results simply in a bang on the right.
+;
+#X text 596 2664 About series:;
+#X text 596 2691 By default \, objects and connections are (currently)
+carried out in the sequence (in time) in which they are created:;
+#X obj 597 2741 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 597 2777 symbol peter;
+#X obj 684 2777 symbol erwin;
+#X obj 597 2811 print;
+#X obj 683 2810 print;
+#X text 596 2873 Of course \, this cannot be seen and should be avoid
+for just that reason!;
+#X text 596 2836 If you first connect a bang to "symbol erwin \, "
+then it (along with anything attached beneath it) is executed first.
+;
+#X text 16 2951 Messages:;
+#X text 16 2988 In this context \, let's have a look at the "writesf~"
+object (an audio object will be introduced here due to the fact that
+symbols are usually used in this context \; the object itself will
+be further explained in the audio chapter). This object saves sound
+as WAV files. It works like this: first we allocate a file in the message
+box to which the sound is to be stored in WAV format: "open [file name]".
+If \, for example \, the file is to be called "test.wav" \, then you
+would enter "open test.wav". Then we use the messages "start" and "stop"
+to start and stop the recording.;
+#X msg 201 3165 start;
+#X msg 202 3186 stop;
+#X obj 108 3212 writesf~;
+#X obj 64 3166 open;
+#X text 420 3087 This did not appear the same as the book. Could not
+complete;
+#X text 16 3288 Lists:;
+#X text 16 3325 The message "open test.wav" is a connection between
+two symbols (because it consists of two words separated by a space).
+This sort of succession of two or more symbols (or numbers) is called
+a "list". The "pack" object can create a list from several "elements".
+For the arguments \, enter indications that specify what kind of elements
+the list should contain. A number \, as with "trigger" \, is expressed
+with "float"* (or "f") \, a symbol with "symbol" (or "s"). If you want
+to create a list that contains the messages "hello" and "43" \, use
+the "pack" object as shown:;
+#X msg 117 3524 hello;
+#X msg 166 3524 43;
+#X obj 116 3567 pack s f;
+#X obj 124 3613 print;
+#X connect 0 0 129 0;
+#X connect 2 0 0 0;
+#X connect 3 0 129 1;
+#X connect 4 0 129 1;
+#X connect 18 0 17 0;
+#X connect 20 0 19 0;
+#X connect 20 0 19 1;
+#X connect 24 0 27 0;
+#X connect 25 0 24 0;
+#X connect 26 0 24 1;
+#X connect 28 0 30 0;
+#X connect 29 0 30 1;
+#X connect 30 0 31 0;
+#X connect 32 0 38 0;
+#X connect 33 0 38 1;
+#X connect 35 0 39 0;
+#X connect 36 0 39 1;
+#X connect 38 0 34 0;
+#X connect 39 0 37 0;
+#X connect 40 0 43 0;
+#X connect 41 0 43 1;
+#X connect 43 0 42 0;
+#X connect 45 0 46 0;
+#X connect 46 0 49 0;
+#X connect 47 0 48 0;
+#X connect 50 0 47 0;
+#X connect 51 0 45 0;
+#X connect 51 0 50 0;
+#X connect 52 0 53 0;
+#X connect 53 0 114 0;
+#X connect 53 1 113 0;
+#X connect 56 0 58 0;
+#X connect 57 0 59 0;
+#X connect 58 0 60 0;
+#X connect 59 0 60 1;
+#X connect 60 0 61 0;
+#X connect 63 0 64 0;
+#X connect 64 0 65 0;
+#X connect 64 1 66 0;
+#X connect 65 0 67 0;
+#X connect 66 0 68 0;
+#X connect 67 0 69 0;
+#X connect 68 0 69 1;
+#X connect 68 0 71 0;
+#X connect 69 0 70 0;
+#X connect 72 0 73 0;
+#X connect 72 0 74 0;
+#X connect 73 0 75 0;
+#X connect 74 0 76 0;
+#X connect 75 0 77 0;
+#X connect 76 0 78 0;
+#X connect 79 0 72 0;
+#X connect 80 0 81 0;
+#X connect 81 0 82 0;
+#X connect 84 0 87 0;
+#X connect 85 0 84 0;
+#X connect 86 0 84 1;
+#X connect 91 0 94 0;
+#X connect 91 1 93 0;
+#X connect 92 0 91 0;
+#X connect 95 0 98 0;
+#X connect 95 1 97 0;
+#X connect 96 0 95 0;
+#X connect 100 0 101 0;
+#X connect 100 1 102 0;
+#X connect 103 0 100 0;
+#X connect 107 0 108 0;
+#X connect 109 0 107 0;
+#X connect 110 0 111 0;
+#X connect 112 0 110 0;
+#X connect 113 0 57 0;
+#X connect 114 0 56 0;
+#X connect 119 0 118 0;
+#X connect 120 0 117 0;
+#X connect 121 0 120 0;
+#X connect 124 0 126 0;
+#X connect 125 0 124 0;
+#X connect 128 0 119 0;
+#X connect 129 0 1 0;
+#X connect 129 0 1 1;
+#X connect 130 0 134 0;
+#X connect 132 0 134 1;
+#X connect 133 0 131 0;
+#X connect 133 0 134 1;
+#X connect 134 0 133 0;
+#X connect 140 0 240 0;
+#X connect 141 0 142 0;
+#X connect 142 0 143 0;
+#X connect 144 0 142 1;
+#X connect 154 0 162 0;
+#X connect 154 0 158 0;
+#X connect 155 0 156 0;
+#X connect 155 0 157 0;
+#X connect 156 0 159 0;
+#X connect 157 0 160 1;
+#X connect 158 0 160 1;
+#X connect 159 0 160 0;
+#X connect 162 0 159 0;
+#X connect 166 0 167 0;
+#X connect 166 0 168 0;
+#X connect 167 0 170 0;
+#X connect 167 0 172 0;
+#X connect 168 0 173 0;
+#X connect 168 0 169 0;
+#X connect 169 0 171 0;
+#X connect 170 0 171 0;
+#X connect 177 0 178 0;
+#X connect 178 0 179 0;
+#X connect 179 0 180 0;
+#X connect 180 0 181 0;
+#X connect 181 0 182 0;
+#X connect 185 0 186 0;
+#X connect 186 0 187 0;
+#X connect 187 0 188 0;
+#X connect 193 0 195 0;
+#X connect 194 0 195 1;
+#X connect 195 0 196 0;
+#X connect 199 0 200 0;
+#X connect 200 0 202 0;
+#X connect 201 0 203 0;
+#X connect 202 0 201 0;
+#X connect 202 0 200 1;
+#X connect 204 0 200 1;
+#X connect 207 0 208 0;
+#X connect 208 0 209 0;
+#X connect 209 0 211 0;
+#X connect 209 1 214 1;
+#X connect 209 2 214 0;
+#X connect 209 3 215 1;
+#X connect 209 3 216 1;
+#X connect 210 0 208 1;
+#X connect 210 0 214 1;
+#X connect 211 0 213 0;
+#X connect 211 0 212 0;
+#X connect 212 0 208 0;
+#X connect 213 0 216 0;
+#X connect 214 0 215 0;
+#X connect 215 0 211 1;
+#X connect 216 0 217 0;
+#X connect 216 0 218 0;
+#X connect 219 0 230 0;
+#X connect 219 0 232 0;
+#X connect 220 0 221 0;
+#X connect 221 0 222 0;
+#X connect 222 0 223 0;
+#X connect 223 0 224 0;
+#X connect 223 0 224 1;
+#X connect 223 0 229 1;
+#X connect 225 0 226 0;
+#X connect 226 0 227 0;
+#X connect 227 0 228 0;
+#X connect 228 0 224 0;
+#X connect 228 0 224 1;
+#X connect 228 0 229 1;
+#X connect 230 0 225 0;
+#X connect 231 0 230 1;
+#X connect 232 0 220 0;
+#X connect 233 0 232 1;
+#X connect 235 0 223 1;
+#X connect 235 0 228 1;
+#X connect 236 0 223 1;
+#X connect 236 0 228 1;
+#X connect 237 0 234 1;
+#X connect 238 0 234 0;
+#X connect 243 0 244 0;
+#X connect 244 0 248 0;
+#X connect 244 1 247 0;
+#X connect 247 0 245 0;
+#X connect 248 0 246 0;
+#X connect 249 0 253 0;
+#X connect 252 0 251 0;
+#X connect 253 0 252 0;
+#X connect 253 1 254 0;
+#X connect 254 0 250 0;
+#X connect 258 0 259 0;
+#X connect 258 0 260 0;
+#X connect 259 0 261 0;
+#X connect 260 0 262 0;
+#X connect 267 0 269 0;
+#X connect 268 0 269 0;
+#X connect 274 0 276 0;
+#X connect 275 0 276 1;
+#X connect 276 0 277 0;
