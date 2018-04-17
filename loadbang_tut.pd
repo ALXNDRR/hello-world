@@ -174,7 +174,7 @@ the number stored in the object is sent as output;
 #X text 16 92 Introduction:;
 #X text 16 361 Basic Mathematics:;
 #X text 16 1208 Float and Counter:;
-#X msg 414 3843 sup;
+#X msg 414 5903 sup;
 #X obj 17 1338 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X obj 17 1367 f;
@@ -313,7 +313,7 @@ number never occurs twice in a row (unlike the normal "random" object)
 -1 -1;
 #X text 514 2330 Create two random melodies that run simultaneously.
 ;
-#X floatatom 414 3865 5 0 0 0 - - -, f 5;
+#X floatatom 414 5925 5 0 0 0 - - -, f 5;
 #X text 16 2664 More on trigger:;
 #X text 16 2701 The "trigger" object is capable of distributing not
 only bangs but also numbers (later we'll learn even more possibilities).
@@ -374,10 +374,252 @@ the list should contain. A number \, as with "trigger" \, is expressed
 with "float"* (or "f") \, a symbol with "symbol" (or "s"). If you want
 to create a list that contains the messages "hello" and "43" \, use
 the "pack" object as shown:;
-#X msg 117 3524 hello;
-#X msg 166 3524 43;
-#X obj 116 3567 pack s f;
-#X obj 124 3613 print;
+#X msg 16 3467 hello;
+#X msg 65 3467 43;
+#X obj 16 3494 pack s f;
+#X obj 16 3518 print;
+#X text 400 3325 Once again: only when the leftmost inlet receives
+input is an (accurate) output generated. (If you click on "hello" first
+without having entered the right input for "pack" \, only "list hello
+0" will result.) The output for the "pack" object can at this point
+only be seen with the "print" object. This then displays: "list hello
+43". The elements of this list can \, however \, also be revealed using
+the inverse object (Pd has a lot of inverse objects) "unpack" \, which
+works according to the same principle as "pack" \, except that what
+appears here as output is the input for the "pack" object.;
+#X msg 400 3482 hello;
+#X msg 453 3482 43;
+#X obj 400 3509 pack s f;
+#X obj 400 3535 unpack s f;
+#X obj 468 3563 print right;
+#X obj 400 3563 print left;
+#X text 400 3590 "print" now displays "43" and "symbol hello". Everything
+that is not a number is preceded by an indication (called a "selector")
+of its data type.;
+#X text 784 3325 Also worthy of note: if you use a symbol anywhere
+but in the leftmost input for a "pack" object \, it must appear like
+this:;
+#X obj 784 3410 pack f s;
+#X msg 784 3379 43, f 2;
+#X msg 829 3378 symbol hello;
+#X obj 784 3439 print;
+#X msg 732 2476 0;
+#X text 764 2475 stop metro;
+#X text 744 2538 on;
+#X text 763 2579 off;
+#X text 16 3742 Let's take a closer look at message boxes: Variables
+can be integrated in a message box's contents. This is done in a similar
+fashion as with "expr" \, but not quite the same: first \, the variables
+are called simply "\$1 \, \$2" \, etc. If you enter a number as input
+for the message "number \$1" \, the output from the message box will
+be the complete expression with this number.;
+#X text 784 3468 One problem with "pack s s": the first input is the
+only one that doesn't have to be specifically labeled as a symbol.
+The second symbol must either be preceded by the word "symbol" in the
+message box or the message has to be converted using a "symbol" object:
+;
+#X msg 786 3547 hello;
+#X msg 831 3547 symbol alex;
+#X obj 786 3572 pack s s;
+#X obj 786 3597 print;
+#X msg 941 3549 hello;
+#X obj 941 3638 print;
+#X obj 941 3610 pack s s;
+#X msg 986 3550 symbol;
+#X msg 986 3579 alex;
+#X text 16 3705 Messages with variables;
+#X floatatom 16 3847 5 0 0 0 - - -, f 5;
+#X msg 16 3871 number \$1;
+#X obj 16 3896 print;
+#X text 400 3742 The use of several variables - e.g. \, "number \$1
+\$2" - does not create a corresponding number of inlets (as it does
+with "expr") \, but instead there remains just one inlet. You need
+to enter a list of numbers into this:;
+#X msg 400 3808 42 666 187 420;
+#X msg 400 3837 number \$1 \$2 \$3;
+#X obj 400 3866 print;
+#X text 784 3742 Symbols must be identified as such;
+#X msg 784 3769 symbol alex;
+#X msg 784 3796 name \$1;
+#X obj 784 3824 print;
+#X msg 879 3769 number 420;
+#X msg 879 3799 blaze it \$1;
+#X obj 879 3829 print;
+#X text 16 3942 Messages: Set;
+#X text 16 3969 You can also completely redefine a message box's contents
+by preceding them with the symbol "set":;
+#X msg 19 4010 set alex;
+#X msg 19 4037 alex, f 7;
+#X text 400 3969 This changes the contents of a message box in execute
+mode (cf. the last point in 2.1.3). Using a variable could \, for example
+\, turn the output of a number box into a message:;
+#X floatatom 400 4022 7 0 0 0 - - -, f 7;
+#X msg 400 4049 set \$1;
+#X msg 400 4078 187;
+#X text 16 4139 Makefilename:;
+#X text 16 4166 Ordinarily it is not possible to include a variable
+without a space to separate it. The "makefilename" object \, however
+\, makes this possible. Variables that can be included in arguments
+are "%d" for digits and "%s" for symbols:;
+#X msg 16 4232 43;
+#X obj 16 4260 makefilename hello%d;
+#X obj 16 4288 print;
+#X msg 184 4232 symbol le;
+#X obj 184 4260 makefilename a%sx;
+#X obj 184 4289 print;
+#X text 398 4139 Openpanel:;
+#X text 398 4166 The object "readsf~”" plays an existing sound file
+\, e.g. \, one that is saved on the hard disk. It needs the message
+"open [name of sound file]". "Name of sound file" refers to the place
+where the file is stored on a data storage device. If you want to use
+"readsf~" in a patch that is saved in the directory c:/Pd/Pd-patches/
+to play a sound file named "hallo.wav" that is also saved in the same
+directory \, you only have to enter "open hallo.wav". If "hallo.wav"
+is saved in the directory c:/Pd/ \, however \, you have to enter: "../hallo.wav"
+or if it's saved in c:/Pd/Pd-patches/soundfiles/ \, then "/soundfiles/hallo.wav".
+If it is in c:/soundfiles/ : "open ../../soundfiles/hallo.wav". Or
+if it is on another drive \, e.g. \, d:/soundfiles \, then you have
+to enter "open d:/soundfiles/hallo.wav". These sometimes complicated
+directory path names can be more easily expressed using "openpanel".
+When it receives a bang \, it opens a window with the available contents
+for all of a computer's drives. When you double-click on a file \,
+"openpanel" enters the entire path for the file (as a symbol) in Pd:
+;
+#X obj 782 4279 openpanel;
+#X obj 782 4310 print;
+#X obj 782 4253 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text 858 4139 Simple data storage:;
+#X text 858 4166 As already explained with the "float" object (2.2.1.1.5)
+\, data can be saved within a patch with the objects "float" \, "symbol"
+\, and "lister" (but it's lost when you close the patch). "float" and
+"lister" are usually abbreviated to "f" and "l". The right inlet receives
+a number \, a symbol \, or a list that is to be stored in the object.
+This stored data is sent as output when the object receives a bang
+in the left inlet. A number \, symbol \, or list can also be sent directly
+into the left inlet \; they are then immediately sent out as output
+(and are also saved in the object itself).;
+#X text 16 4476 Route:;
+#X text 16 4513 An object that can be used to sort various types of
+data is "route". It can also allocate the data type (number \, symbol
+\, list \, bang).;
+#X obj 39 4578 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X msg 65 4578 89;
+#X msg 102 4578 symbol alex;
+#X msg 187 4578 list hello 43 now;
+#X msg 308 4578 unspecified;
+#X obj 38 4621 route bang float symbol list;
+#X obj 38 4659 print a;
+#X obj 95 4659 print b;
+#X obj 152 4659 print c;
+#X obj 208 4659 print d;
+#X obj 264 4659 print e;
+#X text 16 4696 (Everything that cannot be allocated is sent out the
+right outlet.);
+#X text 400 4513 ... as well as order lists according to names you
+have defined:;
+#X msg 400 4563 alex hello;
+#X msg 474 4563 andrew 45 now;
+#X msg 563 4564 something else;
+#X obj 400 4603 route alex andrew;
+#X obj 400 4631 print a;
+#X obj 457 4631 print b;
+#X obj 514 4631 print c;
+#X msg 669 4564 22 777;
+#X msg 726 4566 34 now go;
+#X msg 798 4564 something else;
+#X obj 669 4604 route 22 34;
+#X obj 669 4644 print a;
+#X obj 719 4644 print b;
+#X obj 771 4644 print c;
+#X text 943 4579 Numbers and symbols cannot be combined here. For example
+\, "route 22 dieter" will not work., f 23;
+#X text 16 4773 Demultiplex:;
+#X text 16 4800 "route" distributes an input to various outputs according
+to prefix. "demultiplex" (or "demux" \, both in Pd-extended version)
+distributes an input to various outputs according to the input of another
+inlet. First "demux" receives the numbers of the outlets as an argument
+\, starting with 0: "demux 0 1 2 3". In this example \, there are two
+inlets ("demux" always has only two inlets) and four outlets (one for
+each of the four arguments). Enter a number in the right inlet that
+corresponds to the number of an outlet. Now whatever you enter (number
+\, symbol \, or list) in the left inlet comes out the third outlet:
+;
+#X msg 17 4957 hello alex;
+#X obj 17 4987 demux 0 1 2 3;
+#X floatatom 92 4957 5 0 0 0 - - -, f 5;
+#X obj 17 5020 print a;
+#X obj 73 5020 print b;
+#X obj 129 5020 print c;
+#X obj 185 5020 print d;
+#X text 402 4773 Spigot:;
+#X text 402 4800 Another important object is "spigot". Depending on
+whether its right input is a 0 or a 1 \, "spigot" either sends an input
+through or not – like a gate that is either open or closed.;
+#X obj 402 4892 spigot;
+#X floatatom 402 4866 5 0 0 0 - - -, f 5;
+#X msg 441 4866 1;
+#X floatatom 402 4918 5 0 0 0 - - -, f 5;
+#X obj 475 4893 spigot;
+#X floatatom 475 4866 5 0 0 0 - - -, f 5;
+#X floatatom 475 4920 5 0 0 0 - - -, f 5;
+#X msg 513 4866 0;
+#X text 778 4773 Toggle:;
+#X text 778 4800 As you've seen with "spigot" \, "==" \, and other
+relational tests \, 0 and 1 occur frequently in Pd. Due to this frequency
+– similar to "bang" for a mouse click – there is a graphic object
+for changing between 0 and 1 called "toggle" (Put Toggle or Shift-Ctrl-T).
+;
+#X obj 811 4901 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X obj 778 4926 spigot;
+#X floatatom 778 4879 5 0 0 0 - - -, f 5;
+#X floatatom 778 4955 5 0 0 0 - - -, f 5;
+#X obj 778 5035 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X obj 820 5036 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X floatatom 778 5062 5 0 0 0 - - -, f 5;
+#X floatatom 820 5062 5 0 0 0 - - -, f 5;
+#X floatatom 910 5035 5 0 0 0 - - -, f 5;
+#X floatatom 952 5035 5 0 0 0 - - -, f 5;
+#X obj 910 5066 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X obj 952 5066 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X text 778 4982 Toggle looks like an on/off switch and can often be
+thought of as such. But you should always remember that the computer
+always interprets it as simply a change between 0 and 1;
+#X text 778 5098 By attaching a toggle to a "spigot" you can more clearly
+see if the "gate" is open or closed. Or to see if a relational test
+delivers a positive or ne;
+#X text 16 5210 Applications:;
+#X text 16 5237 Using lists with pitches and dynamics;
+#X text 16 5274 Using a list to assign pitches to an oscillator coupled
+with dynamics:;
+#X msg 16 5315 440 0.6;
+#X msg 77 5315 300 0.3;
+#X msg 138 5315 1000 0.8;
+#X obj 16 5354 unpack f f;
+#X floatatom 16 5379 5 0 0 0 - - -, f 5;
+#X obj 16 5406 osc~;
+#X obj 16 5432 *~;
+#X obj 14 5467 dac~;
+#X floatatom 63 5381 5 0 0 0 - - -, f 5;
+#X obj 110 5408 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X text 412 5237 On/off switch;
+#X text 412 5274 In the first example \, we saw that a tone could be
+turned on and off using "1" and "0". You could use a toggle for this
+as shown:;
+#X obj 413 5358 osc~ 440;
+#X obj 414 5465 dac~;
+#X floatatom 413 5326 5 0 0 0 - - -, f 5;
+#X obj 413 5424 *~ 0;
+#X obj 434 5383 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X text 449 5382 on/off;
 #X connect 0 0 129 0;
 #X connect 2 0 0 0;
 #X connect 3 0 129 1;
@@ -536,6 +778,7 @@ the "pack" object as shown:;
 #X connect 231 0 230 1;
 #X connect 232 0 220 0;
 #X connect 233 0 232 1;
+#X connect 234 0 219 0;
 #X connect 235 0 223 1;
 #X connect 235 0 228 1;
 #X connect 236 0 223 1;
@@ -561,3 +804,93 @@ the "pack" object as shown:;
 #X connect 274 0 276 0;
 #X connect 275 0 276 1;
 #X connect 276 0 277 0;
+#X connect 279 0 281 0;
+#X connect 280 0 281 1;
+#X connect 281 0 282 0;
+#X connect 282 0 284 0;
+#X connect 282 1 283 0;
+#X connect 287 0 290 0;
+#X connect 288 0 287 0;
+#X connect 289 0 287 1;
+#X connect 291 0 230 1;
+#X connect 291 0 232 1;
+#X connect 291 0 234 1;
+#X connect 297 0 299 0;
+#X connect 298 0 299 1;
+#X connect 299 0 300 0;
+#X connect 301 0 303 0;
+#X connect 303 0 302 0;
+#X connect 304 0 305 0;
+#X connect 305 0 303 1;
+#X connect 307 0 308 0;
+#X connect 308 0 309 0;
+#X connect 311 0 312 0;
+#X connect 312 0 313 0;
+#X connect 315 0 316 0;
+#X connect 316 0 317 0;
+#X connect 318 0 319 0;
+#X connect 319 0 320 0;
+#X connect 323 0 324 0;
+#X connect 326 0 327 0;
+#X connect 327 0 328 0;
+#X connect 331 0 332 0;
+#X connect 332 0 333 0;
+#X connect 334 0 335 0;
+#X connect 335 0 336 0;
+#X connect 346 0 351 0;
+#X connect 347 0 351 0;
+#X connect 348 0 351 0;
+#X connect 349 0 351 0;
+#X connect 350 0 351 0;
+#X connect 351 0 352 0;
+#X connect 351 1 353 0;
+#X connect 351 2 354 0;
+#X connect 351 3 355 0;
+#X connect 351 4 356 0;
+#X connect 359 0 362 0;
+#X connect 360 0 362 0;
+#X connect 361 0 362 0;
+#X connect 362 0 363 0;
+#X connect 362 1 364 0;
+#X connect 362 2 365 0;
+#X connect 366 0 369 0;
+#X connect 367 0 369 0;
+#X connect 368 0 369 0;
+#X connect 369 0 370 0;
+#X connect 369 1 371 0;
+#X connect 369 2 372 0;
+#X connect 376 0 377 0;
+#X connect 377 0 379 0;
+#X connect 377 1 380 0;
+#X connect 377 2 381 0;
+#X connect 377 3 382 0;
+#X connect 378 0 377 1;
+#X connect 385 0 388 0;
+#X connect 386 0 385 0;
+#X connect 387 0 385 1;
+#X connect 389 0 391 0;
+#X connect 390 0 389 0;
+#X connect 392 0 389 1;
+#X connect 395 0 396 1;
+#X connect 396 0 398 0;
+#X connect 397 0 396 0;
+#X connect 399 0 401 0;
+#X connect 400 0 402 0;
+#X connect 403 0 405 0;
+#X connect 404 0 406 0;
+#X connect 412 0 415 0;
+#X connect 413 0 415 0;
+#X connect 414 0 415 0;
+#X connect 415 0 416 0;
+#X connect 415 1 420 0;
+#X connect 416 0 417 0;
+#X connect 417 0 418 0;
+#X connect 418 0 419 0;
+#X connect 418 0 419 1;
+#X connect 420 0 418 1;
+#X connect 421 0 418 1;
+#X connect 424 0 427 0;
+#X connect 426 0 424 0;
+#X connect 427 0 425 0;
+#X connect 427 0 425 1;
+#X connect 428 0 427 1;
